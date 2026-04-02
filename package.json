@@ -1,0 +1,10 @@
+{
+  "name": "@uos/skills-catalog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Skills catalog package for vendored skill content and generated catalogs.",
+  "scripts": {
+    "test": "node --test tests/smoke.test.mjs"
+  }
+}
