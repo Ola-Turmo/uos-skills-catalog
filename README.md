@@ -1,33 +1,72 @@
 # @uos/skills-catalog
 
-Skills catalog package for vendored skill content and generated catalogs.
+@uos/skills-catalog is the home for extracted skills, generated catalogs, metadata, and skill quality intelligence. It should make skills discoverable, evaluable, and portable while removing catalog debt from core.
 
-Part of the Universal Operating System stack built on top of [Paperclip](https://github.com/paperclipai/paperclip), the open-source control plane for agentic teams.
+Built as part of the UOS split workspace on top of [Paperclip](https://github.com/paperclipai/paperclip), which remains the upstream control-plane substrate.
 
-## Why This Repo Exists
+## What This Repo Owns
 
-This package is the dedicated home for vendored skills, generated catalogs, and enablement content. The goal is to make that capability independently versionable, easier to explain, and easier to harden as the UOS stack continues to split out of the original monorepo.
+- Skill metadata schemas, generated catalogs, and indexing.
+- Extraction flow from core and related tool bundles.
+- Skill quality evaluation, tagging, lineage, and discoverability.
+- Packaging, versioning, and compatibility notes for skills.
+- Benchmarking and curation of active/high-value skills.
 
-## What You Get
+## Runtime Form
 
-- A focused package boundary around vendored skills, generated catalogs, and enablement content
-- A clean place to evolve APIs, tests, and release process without dragging the whole stack with it
-- A repo that stays explicitly connected to the upstream Paperclip platform instead of pretending to replace it
+- Split repo with package code as the source of truth and a Paperclip plugin scaffold available for worker, manifest, UI, and validation surfaces when the repo needs runtime or operator-facing behavior.
 
-## Relationship To Paperclip
+## Highest-Value Workflows
 
-Paperclip remains the platform substrate: company primitives, agents, projects, workspaces, skills, routines, budgets, approvals, and runtime enforcement live there. This repo exists to extend that platform, not fork it. See the upstream project at [paperclipai/paperclip](https://github.com/paperclipai/paperclip).
+- Extracting a skill from core or a tools bundle into the catalog.
+- Normalizing metadata and publishing searchable indexes.
+- Evaluating skill quality, coverage, and safety.
+- Deprecating, replacing, or merging overlapping skills.
+- Tracking skill usage and task outcome feedback.
 
-## Current Status
+## Key Connections and Operating Surfaces
 
-- This repo is CI-backed and intentionally narrow.
-- It is still earlier in the extraction sequence than `@uos/core`, so expect the implementation surface to grow over time.
-- Transitional cross-workspace verification still lives in the main UOS monorepo via `npm run split:verify`.
+- GitHub repos, local skill bundles, docs, READMEs, package registries, web search, and browser extraction workflows needed to discover, compare, classify, and improve skills.
+- Google Drive, Docs, Sheets, Notion, internal wikis, CSV exports, and structured metadata stores when skills are documented, scored, or curated outside code repositories.
+- Embeddings, vector indexes, lexical search, evaluation datasets, telemetry, and usage logs when better retrieval, deduplication, or quality measurement requires them.
+- Any tool or connection that helps turn skills into portable, reviewable, searchable, and measurable assets across the rest of UOS.
+
+## KPI Targets
+
+- 100% of active catalog entries have normalized metadata, ownership, and lifecycle status fields.
+- Duplicate or materially overlapping skills fall below 10% of the active catalog.
+- The top 20 highest-traffic skills have evaluation scorecards covering quality, safety, and task fit.
+- Search precision at 5 reaches >= 0.80 on the maintained benchmark query set.
+
+## Implementation Backlog
+
+### Now
+- Normalize the metadata model and clean up the first wave of extracted or vendored skills.
+- Establish a benchmark query set and evaluation rubric for search and recommendation quality.
+- Document the extraction path from core and tool repos into the catalog.
+
+### Next
+- Add usage and outcome feedback loops so the catalog learns from real task performance.
+- Reduce overlap by merging or deprecating redundant skills and clarifying ownership.
+- Improve retrieval with better indexing, embeddings, and metadata-driven ranking.
+
+### Later
+- Support package-grade publishing and versioning flows for the strongest catalog entries.
+- Expose skill quality and coverage reporting directly into UOS planning and operations surfaces.
+
+## Local Plugin Use
+
+```bash
+curl -X POST http://127.0.0.1:3100/api/plugins/install \
+  -H "Content-Type: application/json" \
+  -d '{"packageName":"<absolute-path-to-this-repo>","isLocalPath":true}'
+```
 
 ## Validation
 
 ```bash
 npm install
 npm test
+npm run plugin:typecheck
+npm run plugin:test
 ```
-
